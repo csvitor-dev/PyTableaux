@@ -1,0 +1,5 @@
+# venv folders
+pytableaux/
+
+# python-generated cache
+__pycache__/
