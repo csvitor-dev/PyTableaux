@@ -1,23 +1,23 @@
 from pathlib import Path
-from file_manipulation.FormulaBuilder import FormulaBuilder as FB
 from file_manipulation.FileReader import FileReader as FR
+from solver.FormulaBuilder import FormulaBuilder as FB
 
-class FileManager:  
-    @staticmethod
-    def get_formulas_on_file(file_name: str) -> dict[str: bool] | None:
+class FileManager: 
+
+    def __init__(self, file_name: str) -> None:
+        self.__path_ = Path(f'../pyTableaux/inputs/{file_name}')
+    
+    def __path_is_valid(self) -> bool:
+        return self.__path_.exists()
+
+    def get_formulas_on_file(self) -> dict[str: bool] | None:
+        if not self.__path_is_valid():
+            raise FileNotFoundError({'error': f'file not found on path: {self.__path_}'})
+
         try:
-            lines = FR.get_lines_of_file(Path(f'../pyTableaux/file_manipulation/inputs/{file_name}'))
-        except FileNotFoundError as e:
-            print(e.args[0])
-            return
+            formulas = FR.get_lines_of_file(self.__path_)
         except IOError as e:
             print(e.args[0])
             return
-        
-        try:
-            number_formulas = int(lines[0])
-            lines = FR.clear_lines(lines[1:])
-        except ValueError as e:
-            print(e.args[0])
-            return
-        return FB.build_marked_formulas(number_formulas, lines)
+        number_formulas = int(formulas[0])
+        return FB.build_marked_formulas(number_formulas, formulas)
