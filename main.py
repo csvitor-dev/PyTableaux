@@ -1,22 +1,21 @@
 """ 
-
+    TRABALHO DE LÓGICA PARA COMPUTAÇÃO
+Equipe:
+    - Nicolas
+    - Vitor Costa de Sousa (536678)[ES]
 """
 
 import sys
-from file_manipulation.FileManager import FileManager as FM
+from file_manipulation.FileManagerContent import FileContentManager
 
-sys.path.append('..\\pyTableaux\\')
+def main() -> None:
+    raw: list[str] = sys.stdin.readlines()
 
-def main(args) -> None:
-    print(args)
-    """ build = FM()
-
-    try:
-        result = build.get_formulas_on_file()
-    except FileNotFoundError as e:
-        print(e.args[0])
-        return
-    print(result) """
+    build = FileContentManager(raw)
+    formulas = build.get_formulas_on_file()
+    
+    if not formulas is None:
+        print(formulas)
 
 if __name__ == "__main__":
-    main(sys.args)
+    main()
