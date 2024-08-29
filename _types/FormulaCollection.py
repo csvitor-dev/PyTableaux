@@ -1,4 +1,4 @@
-class Formula:
+class FormulaCollection:
 
     def __init__(self) -> None:
         self.__structure = dict()

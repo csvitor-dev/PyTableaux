@@ -1,10 +1,10 @@
 from parser.PropositionalFormula import PropositionalFormula as PF
 from solver.BranchsTree import BranchsTree
 from solver.RulesExpander import RulesExpander
-from _types.Formula import Formula
+from _types.FormulaCollection import FormulaCollection
 
 class Tableaux:
-    def __init__(self, formulas: Formula) -> None:
+    def __init__(self, formulas: FormulaCollection) -> None:
         self.__formulas = formulas
         self.__branchs = BranchsTree(formulas)
         self.__rules_agent = RulesExpander()
