@@ -11,6 +11,18 @@ class Tableaux:
         self.__rules_agent = RulesExpander()
 
     def solve(self) -> None:
-        for formula in self.__formulas.get_formulas():
-            print(PF.get_main_conective_and_immediate_subformulas(formula))
+        print(self.__formulas.formulas)
+
+        for bind in self.__formulas.get_formulas():
+            operator, subformulas = PF.get_main_conective_and_immediate_subformulas(bind[0])
+            marking = bind[1]
+
+            if operator == 'atom':
+                self.__atomic_formulas_list.append(subformulas[0])
+                continue
+            sub1, sub2 = self.__rules_agent.expand(marking, operator, subformulas)
+            self.__formulas.add_formula(sub1)
+            self.__formulas.add_formula(sub2)
+        print(self.__formulas.formulas)
+
     

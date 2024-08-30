@@ -19,6 +19,6 @@ class FormulaBuilder:
 
         marked_formulas = FormulaCollection()
         for i in range(amount - 1):
-            marked_formulas.add_formula(formulas[i], True)
-        marked_formulas.add_formula(formulas[amount - 1], False)
+            marked_formulas.add_formula((formulas[i], True))
+        marked_formulas.add_formula((formulas[amount - 1], False))
         return marked_formulas
