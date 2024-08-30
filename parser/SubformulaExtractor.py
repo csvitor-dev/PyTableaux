@@ -1,5 +1,5 @@
 from lark import Transformer
-from parser.lark_config import TOKEN_AND, TOKEN_OR, TOKEN_NEG, TOKEN_IMPL
+from _types.tokens import TOKEN_AND, TOKEN_IMPL, TOKEN_NEG, TOKEN_OR
 
 class SubformulaExtractor(Transformer):
     def __init__(self):

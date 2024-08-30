@@ -1,9 +1,5 @@
 from lark import Lark
-
-TOKEN_OR   = "|"
-TOKEN_AND  = "&"
-TOKEN_IMPL = "->"
-TOKEN_NEG  = "¬"
+from _types.tokens import TOKEN_AND, TOKEN_IMPL, TOKEN_NEG, TOKEN_OR
 
 grammar = """
     start: expr
