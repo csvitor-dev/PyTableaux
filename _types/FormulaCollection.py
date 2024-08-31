@@ -1,11 +1,15 @@
 class FormulaCollection:
 
     def __init__(self) -> None:
-        self.__structure = dict()
+        self.__structure = {}
 
     @property
     def formulas(self) -> dict[str: bool]:
         return self.__structure
+    
+    @property
+    def length(self) -> int:
+        return len(self.__structure)
 
     def get_formulas(self) -> list[tuple[str, bool]]:
         return list(self.__structure.items())
