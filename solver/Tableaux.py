@@ -7,13 +7,11 @@ class Tableaux:
     def __init__(self, formulas: FormulaCollection) -> None:
         self.__atomic_formulas_list = []
         self.__branchs = BranchsTree(formulas)
-        self.__formulas = formulas
         self.__rules_agent = RulesExpander()
 
     def solve(self) -> None:
-        print(self.__formulas.formulas)
-
-        for bind in self.__formulas.get_formulas():
+        print(self.__branchs.root.formulas)
+        for bind in self.__branchs.root.get_formulas():
             operator, subformulas = PF.get_main_conective_and_immediate_subformulas(bind[0])
             marking = bind[1]
 
@@ -21,8 +19,8 @@ class Tableaux:
                 self.__atomic_formulas_list.append(subformulas[0])
                 continue
             sub1, sub2 = self.__rules_agent.expand(marking, operator, subformulas)
-            self.__formulas.add_formula(sub1)
-            self.__formulas.add_formula(sub2)
-        print(self.__formulas.formulas)
+            self.__branchs.add_formulas_on_root(sub1)
+            self.__branchs.add_formulas_on_root(sub2)
+        print(self.__branchs.root.formulas)
 
     

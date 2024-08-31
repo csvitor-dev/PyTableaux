@@ -16,3 +16,6 @@ class FormulaCollection:
     def drop_formula(self, key: str) -> bool:
         return self.__structure.pop(key)
     
+    def drop_all(self) -> None:
+        self.__structure.clear()
+    
