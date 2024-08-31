@@ -11,7 +11,7 @@ class FileContentManager:
             arg[index] = line.replace('\n', '')
         return arg
 
-    def get_formulas_on_file(self) -> FormulaCollection | None:
+    def get_formulas_on_file(self) -> tuple[FormulaCollection, int] | None:
         number_formulas = int(self.__file_content[0])
         formulas = self.__file_content[1:]
         return FB.build_marked_formulas(number_formulas, formulas)

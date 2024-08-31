@@ -19,12 +19,12 @@ def main() -> None:
         print(e.args[0])
         return
     build = FileContentManager(raw)
-    formulas = build.get_formulas_on_file()
+    formulas, number_of_atoms = build.get_formulas_on_file()
     
     if formulas is None:
         print("the formulas were not generated")
 
-    tableaux = Tableaux(formulas)
+    tableaux = Tableaux(formulas, number_of_atoms)
     tableaux.solve()
 
 if __name__ == "__main__":
