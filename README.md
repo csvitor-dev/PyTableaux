@@ -1,10 +1,24 @@
-# PyTableaux | **Tableaux** solver with _**Python**_
+# PyTableaux | Tableaux solver with _Python_
 
-Just clone this repository and run the following command in the project root:
-(make sure the **Python** version is `3.12.1`)
+Before anything else, set up your _**Python**_ environment (`venv`) with the follwing command in the current folder:
+
+The first step is to install the version of _**Python**_ used in the project, which is contained in the file `.python-version`:
 
 ```bash
-pip install -r ./requirements.txt
+pyenv install
+```
+
+Now create the environment using this installed version:
+
+```bash
+pyenv virtualenv <py_version> <env_name>
+pyenv activate <env_name>
+```
+
+And install the dependencies:
+
+```bash
+pip install --require-virtualenv -r ./requirements.txt
 ```
 
 To insert an input file, simpley enter the following in the terminal:
