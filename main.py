@@ -25,7 +25,7 @@ def main() -> None:
         print("the formulas were not generated")
 
     tableaux = Tableaux(formulas, number_of_atoms)
-    tableaux.solve()
+    tableaux.exec()
 
 if __name__ == "__main__":
     main()

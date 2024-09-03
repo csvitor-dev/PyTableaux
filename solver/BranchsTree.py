@@ -24,3 +24,15 @@ class BranchsTree:
 
     def add_formulas_on_root(self, key_value_pair: tuple[str, bool]) -> None:
         self.root.add_formula(key_value_pair)
+
+    def remove_formula_on_branchs(self, formula: str) -> None:
+        if formula in self.root.formulas:
+            self.root.drop_formula(formula)
+            return
+        if self.new_branch != None:
+            self.new_branch.remove_formula_on_branchs(formula)   
+
+    def find_open_branch(self) -> FormulaCollection:
+        if self.new_branch == None:
+            return self.root
+        return self.new_branch.find_open_branch()
