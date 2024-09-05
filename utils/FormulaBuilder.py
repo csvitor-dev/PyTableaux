@@ -1,6 +1,6 @@
 import re
 from parser.PropositionalFormula import PropositionalFormula as PF
-from _types.FormulaCollection import FormulaCollection
+from utils.Branch import Branch
 
 class FormulaBuilder:
 
@@ -11,7 +11,7 @@ class FormulaBuilder:
                 raise ValueError({'error': f'has an invalid formula {sentence}'})
 
     @staticmethod
-    def build_marked_formulas(amount: int, formulas: list[str]) -> tuple[FormulaCollection, int] | None:
+    def build_marked_formulas(amount: int, formulas: list[str]) -> tuple[Branch, int] | None:
         try:
             FormulaBuilder.__validate_formulas(formulas)
         except ValueError as e:
@@ -20,7 +20,7 @@ class FormulaBuilder:
         
         number_of_atoms = FormulaBuilder.__number_of_atoms(formulas)
 
-        marked_formulas = FormulaCollection()
+        marked_formulas = Branch()
         for i in range(amount - 1):
             marked_formulas.add_formula((formulas[i], True))
         marked_formulas.add_formula((formulas[amount - 1], False))

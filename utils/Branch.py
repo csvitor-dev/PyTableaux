@@ -1,11 +1,11 @@
-class FormulaCollection:
-
-    def __init__(self, key_value_pair: tuple[str: bool] = None) -> None:
-        self.__structure = self.init(key_value_pair)
+class Branch:
     
-    def init(self, key_value_pair: tuple[str: bool] | None) -> dict:
+    def __init__(self, key_value_pair: tuple[str, bool] = None) -> None:
+        self.__structure = self.init(key_value_pair)    
+
+    def init(self, key_value_pair: tuple[str, bool] | None) -> dict:
         if key_value_pair:
-            return {key_value_pair[0]: key_value_pair[1]}
+            return { key_value_pair[0]: key_value_pair[1] }
         return {}
 
     @property
