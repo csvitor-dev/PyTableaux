@@ -1,5 +1,5 @@
-from _types.FormulaBuilder import FormulaBuilder as FB
-from _types.FormulaCollection import FormulaCollection
+from utils.FormulaBuilder import FormulaBuilder as FB
+from utils.Branch import Branch
 
 class FileContentManager: 
 
@@ -11,7 +11,7 @@ class FileContentManager:
             arg[index] = line.replace('\n', '')
         return arg
 
-    def get_formulas_on_file(self) -> tuple[FormulaCollection, int] | None:
+    def get_formulas_on_file(self) -> tuple[Branch, int] | None:
         number_formulas = int(self.__file_content[0])
         formulas = self.__file_content[1:]
         return FB.build_marked_formulas(number_formulas, formulas)
