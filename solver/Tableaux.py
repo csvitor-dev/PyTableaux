@@ -1,22 +1,20 @@
 from parser.PropositionalFormula import PropositionalFormula as PF
 from solver.BranchsTree import BranchsTree
 from solver.RulesExpander import RulesExpander
-from _types.FormulaCollection import FormulaCollection
-from _types.mark_mapping import mark_mapping
+from utils.Branch import Branch
+from utils.mark_mapping import mark_mapping
 
 class Tableaux:
-    def __init__(self, formulas: FormulaCollection, number_of_atoms: int) -> None:
-        self.__marked_atoms = FormulaCollection()
-        self.__betas: list[FormulaCollection] = []
+    def __init__(self, formulas: Branch, number_of_atoms: int) -> None:
+        self.__marked_atoms = Branch()
+        self.__betas: list[Branch] = []
         self.__remove_formulas: list[str] = []
         self.__number_of_atoms = number_of_atoms
         self.__branchs = BranchsTree(formulas)
         self.__rules_agent = RulesExpander()
 
     def exec(self) -> None:
-        self.__solve(self.__branchs.root)
-
-        if self.__marked_atoms.length == self.__number_of_atoms:
+        if self.__has_saturated_branch():
             print("unsatisfiable")
             self.__show_marked_atoms()
             return
@@ -24,8 +22,14 @@ class Tableaux:
         if self.__sat():
             print("satisfiable")
             return
+        
+        if self.__branchs.has_open_branch:
+            open_branch = self.__branchs.find_open_branch()
+            self.__solve(open_branch)
+            self.exec()
+        
             
-    def __solve(self, formulas: FormulaCollection) -> None:
+    def __solve(self, formulas: Branch) -> None:
         for formula, marking in formulas.get_formulas():
             operator, subformulas = PF.get_main_conective_and_immediate_subformulas(formula)
             self.__register_expandable_formula(operator, formula)
@@ -34,6 +38,7 @@ class Tableaux:
                 has_conjugate_pair = self.__manipulate_atoms(subformulas[0], marking)
                 if has_conjugate_pair:
                     self.__branchs.discard_closed_branch(formulas)
+                continue
             result, rule = self.__rules_agent.expand(marking, operator, subformulas)
 
             if rule == "alpha":
@@ -41,22 +46,20 @@ class Tableaux:
                     self.__branchs.add_formulas_on_branch(alpha, formulas)
             else:
                 for beta in result:
-                    self.__betas.append(FormulaCollection(beta))
+                    self.__betas.append(Branch(beta))
         self.__active_remove_expandable_formulas()
-        
-        if self.__branchs.has_open_branch and len(self.__betas) == 0:
-            open_branch = self.__branchs.find_open_branch()
-            self.__solve(open_branch)
             
         if len(self.__betas):
             for beta_formula in self.__betas:
                 self.__branchs.add_branch(beta_formula, formulas)
                 self.__betas.remove(beta_formula)
                 self.__solve(beta_formula)
-        
 
     def __sat(self) -> bool:
-        return self.__marked_atoms.length < self.__number_of_atoms
+        return self.__marked_atoms.length < self.__number_of_atoms and not self.__branchs.has_open_branch
+    
+    def __has_saturated_branch(self) -> bool:
+        return self.__marked_atoms.length == self.__number_of_atoms
     
     def __manipulate_atoms(self, atom: str, marking: bool) -> bool:
         if not self.__marked_atoms.contains(atom):
