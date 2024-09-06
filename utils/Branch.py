@@ -3,21 +3,22 @@ class Branch:
     def __init__(self, key_value_pair: tuple[str, bool] = None) -> None:
         self.__structure = self.init(key_value_pair)    
 
-    def init(self, key_value_pair: tuple[str, bool] | None) -> dict:
+    def init(self, key_value_pair: tuple[str, bool] | None) -> dict[str: bool]:
         if key_value_pair:
             return { key_value_pair[0]: key_value_pair[1] }
         return {}
-
+    
     @property
     def formulas(self) -> list[str]:
         return list(self.__structure.keys())
     
     @property
+    def marked_formulas(self) -> list[tuple[str, bool]]:
+        return list(self.__structure.items())
+    
+    @property
     def length(self) -> int:
         return len(self.__structure)
-
-    def get_formulas(self) -> list[tuple[str, bool]]:
-        return list(self.__structure.items())
     
     def add_formula(self, key_value_pair: tuple[str, bool]) -> None:
         self.__structure[key_value_pair[0]] = key_value_pair[1]
