@@ -9,12 +9,12 @@ class BranchsTree:
     
     @property
     def has_open_branch(self) -> bool:
-        if self.root == None:
-            return False
         if self.right_branch != None:
             return self.right_branch.has_open_branch
         if self.left_branch != None:
             return self.left_branch.has_open_branch
+        if self.root == None:
+            return False
         return True
 
     def add_branch(self, beta: Branch, collection: Branch) -> None:
@@ -22,8 +22,12 @@ class BranchsTree:
 
         if hook.right_branch == None:
             hook.right_branch = BranchsTree(beta)
-        else:
+        elif hook.left_branch == None:
             hook.left_branch = BranchsTree(beta)
+        elif hook.right_branch.root != None:
+            self.right_branch.add_branch(beta, hook.right_branch.root)
+        elif hook.left_branch.root != None:
+            self.left_branch.add_branch(beta, hook.left_branch.root)
 
     def discard_closed_branch(self, collection: Branch) -> None:
         hook = self.__search_branch(collection)
@@ -45,16 +49,19 @@ class BranchsTree:
             self.left_branch.remove_formula_on_branch(formula)
 
     def find_open_branch(self) -> Branch:
-        if self.right_branch == None and self.left_branch == None:
-            return self.root
         if self.right_branch != None:
             return self.right_branch.find_open_branch()
-        return self.left_branch.find_open_branch()
+        if self.left_branch != None:
+            return self.left_branch.find_open_branch()
+        return self.root
     
     def __search_branch(self, collection: Branch):
-        if self.root.formulas == collection.formulas:
+        if self.root == None:
+            return
+        
+        if self.root.marked_formulas == collection.marked_formulas:
             return self
-        if self.right_branch != None:
+        if self.right_branch.root != None:
             return self.right_branch.__search_branch(collection)
-        if self.left_branch != None:
+        if self.left_branch.root != None:
             return self.left_branch.__search_branch(collection)
