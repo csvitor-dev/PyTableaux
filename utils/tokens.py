@@ -1,3 +1,4 @@
+"""simbolos proposicionais"""
 TOKEN_OR   = "|"
 TOKEN_AND  = "&"
 TOKEN_IMPL = "->"

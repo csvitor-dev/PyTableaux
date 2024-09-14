@@ -1,5 +1,5 @@
 class Branch:
-    
+    """ classe `Branch`, representa uma estrutura de dados para armazenar fórmulas proposicionais e seus respectivos valores booleanos. A classe foi feita para facilitar o gerenciamento de pares de fórmulas e seus valores (verdadeiro ou falso). Possui os metodos adcionar e remover formulas, consultar os valores, verificar se a formula existe """
     def __init__(self, key_value_pair: tuple[str, bool] = None) -> None:
         self.__structure = self.init(key_value_pair)    
 

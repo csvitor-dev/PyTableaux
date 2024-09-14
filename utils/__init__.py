@@ -1,0 +1,1 @@
+"""define todos os utilitarios e tipos usados na aplicação """
