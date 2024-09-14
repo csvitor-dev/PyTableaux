@@ -29,7 +29,7 @@ class Branch:
     def drop_all(self) -> None:
         self.__structure.clear()
 
-    def value(self, key: str) -> bool:
+    def get_value(self, key: str) -> bool:
         return self.__structure[key]
 
     def contains(self, key: str) -> bool:
