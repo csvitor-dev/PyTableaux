@@ -2,6 +2,9 @@ from utils.FormulaBuilder import FormulaBuilder as FB
 from utils.Branch import Branch
 
 class FileContentManager: 
+    '''
+    Classe de ajuste de fórmulas, alinhando os dados de dentro dos arquivos para análises.
+    '''
 
     def __init__(self, raw_file_content: list[str]) -> None:
         self.__file_content: list[str] = self.__clear_content(raw_file_content)

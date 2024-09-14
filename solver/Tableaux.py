@@ -5,6 +5,12 @@ from utils.Branch import Branch
 from utils.mark_mapping import mark_mapping
 
 class Tableaux:
+    '''
+    Classe de execução do Tableaux
+    :
+    A classe executa as expansões e retorna se é satisfazível, no caso de que todas as branchs terminam fechadas,
+    ou insatisfazível, em caso de um ramo aberto, além dos átomos que resultaram neste.
+    '''
     def __init__(self, formulas: Branch, number_of_atoms: int) -> None:
         self.__marked_atoms = Branch()
         self.__remove_formulas: list[str] = []

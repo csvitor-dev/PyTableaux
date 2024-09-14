@@ -3,7 +3,7 @@ from parser.PropositionalFormula import PropositionalFormula as PF
 from utils.Branch import Branch
 
 class FormulaBuilder:
-
+    """ a classe `FormulaBuilder` contém dois métodos estáticos (__validate_formulas e build_marked_formulas). A função principal dessa classe é construir e validar fórmulas proposicionais e marcá-las com valores booleanos, retornando-as em um objeto Branch junto com o número de átomos presentes nas fórmulas."""
     @staticmethod
     def __validate_formulas(formulas: list[str]) -> ValueError | None:
         for sentence in formulas:    
