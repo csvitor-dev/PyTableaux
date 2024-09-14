@@ -2,8 +2,8 @@
     TRABALHO DE LÓGICA PARA COMPUTAÇÃO
 Equipe:
     - Francisco Guilherme Ferreira Dias Martins (515106) [CC]
-    - Nicolas Maurício Chaves (539802) [ES]
-    - Vitor Costa de Sousa    (536678) [ES]
+    - Nicolas Maurício Chaves                   (539802) [ES]
+    - Vitor Costa de Sousa                      (536678) [ES]
 """
 
 import sys
