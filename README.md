@@ -24,11 +24,30 @@ pip install --require-virtualenv -r ./requirements.txt
 To insert an input file, simpley enter the following in the terminal:
 
 ```bash
+python main.py < ./inputs/<benchmark-file>.tab
+```
+
+For example, let's insert to first test file:
+
+```bash
 python main.py < ./inputs/example.tab
 ```
 
 This example file will generate the following output:
 
 ```bash
-{'((a->b)&(b->c))': True, 'a': True, 'c': False}
+satisfiable
+```
+
+Now, let's test a file that admits an **UNSAT** formula:
+
+```
+python main.py < ./inputs/example2.tab
+```
+
+Generating the following output:
+
+```bash
+unsatisfiable
+Tp Fq
 ```
