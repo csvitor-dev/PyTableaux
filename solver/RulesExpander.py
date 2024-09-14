@@ -1,6 +1,11 @@
-from _types.tokens import TOKEN_AND, TOKEN_IMPL, TOKEN_NEG, TOKEN_OR
+from utils.tokens import TOKEN_AND, TOKEN_IMPL, TOKEN_NEG, TOKEN_OR
 
 class RulesExpander:
+    '''
+    Classe de Regras para expansão de um ramo.
+    :
+    Diferenciando as expansões alfas e betas, implementando suas regras de decomposição
+    '''
     
     def __init__(self) -> None:
         self.__alphas = {TOKEN_AND: (True, True), TOKEN_OR: (False, False), TOKEN_IMPL: (True, False)}
@@ -11,8 +16,6 @@ class RulesExpander:
             return self.__reversing_polarity(marking, subformulas[0])
         
         match operator:
-            case "atom":
-                return self.__marked_atom(marking, subformulas[0])
             case "&":
                 if marking:
                     return self.__alpha_rule(self.__alphas[TOKEN_AND], subformulas[0], subformulas[1])
@@ -25,9 +28,6 @@ class RulesExpander:
                 if not marking:
                     return self.__alpha_rule(self.__alphas[TOKEN_IMPL], subformulas[0], subformulas[1])
                 return self.__beta_rule(self.__betas[TOKEN_IMPL], subformulas[0], subformulas[1])
-
-    def __marked_atom(self, marking: bool, atom: str) -> tuple[list[tuple[str, bool]], str]:
-        return [(atom, marking)], "atom"
 
     def __reversing_polarity(self, marking: bool, alpha: str) -> tuple[list[tuple[str, bool]], str]:
         return [(alpha, not marking)], "alpha"

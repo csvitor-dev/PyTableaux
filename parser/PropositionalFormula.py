@@ -1,8 +1,10 @@
+
 from parser.lark_config import parser
 from parser.SubformulaExtractor import SubformulaExtractor
 
 class PropositionalFormula:
-    @staticmethod
+    """ Classe `PropositionalFormula` tem o proposito de verificar se a fórmula é valida ou não, se a fórmula for valida ele retorna a fórmula e obtém o conectivo principal e suas subfórmulas.  """
+    @staticmethod 
     def __get_parsed_formula(formula: str):
         try:
           parse_tree = parser.parse(formula)

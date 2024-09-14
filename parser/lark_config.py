@@ -1,5 +1,7 @@
+""" define a gramática do tableaux"""
+
 from lark import Lark
-from _types.tokens import TOKEN_AND, TOKEN_IMPL, TOKEN_NEG, TOKEN_OR
+from utils.tokens import TOKEN_AND, TOKEN_IMPL, TOKEN_NEG, TOKEN_OR
 
 grammar = """
     start: expr
