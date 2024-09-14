@@ -1,6 +1,12 @@
 from utils.Branch import Branch
 
 class BranchsTree:
+    '''
+    Classe para executar a busca por profundidade.
+    :
+    A classe faz buscas de possíveis ramos abertos, adição de ramos, assim como as fórmulas que geram esses 
+    novos ramos e a remoções dessas fórmulas em casos de um ramo fechado.
+    '''
     
     def __init__(self, first_branch: Branch) -> None:
         self.root = first_branch

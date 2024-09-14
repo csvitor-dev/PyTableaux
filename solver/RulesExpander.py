@@ -1,6 +1,11 @@
 from utils.tokens import TOKEN_AND, TOKEN_IMPL, TOKEN_NEG, TOKEN_OR
 
 class RulesExpander:
+    '''
+    Classe de Regras para expansão de um ramo.
+    :
+    Diferenciando as expansões alfas e betas, implementando suas regras de decomposição
+    '''
     
     def __init__(self) -> None:
         self.__alphas = {TOKEN_AND: (True, True), TOKEN_OR: (False, False), TOKEN_IMPL: (True, False)}
